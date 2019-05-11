@@ -1,10 +1,5 @@
 #!/bin/bash
 #author: Yiheng
-#description: 
-#create: 5/10/2019
-
-#!/bin/bash
-#author: Yiheng
 #description: 搜索传入路径下所有题目文件
 #create: 3/8/2019
 
@@ -18,9 +13,12 @@ if [[ $# -gt 0 ]]; then
             -q | --question-dir )
                 shift
                 questionDir=$1
+                echo "set question dir is: $questionDir"
                 ;;
             -a | --answer-dir )
-                answerDir=1
+                shift
+                answerDir=$1
+                echo "set answer dir is: $answerDir"
                 ;;
             -h | --help )
                 exit
@@ -31,10 +29,10 @@ if [[ $# -gt 0 ]]; then
         shift
     done
 
-    for dir in $@ ; do
-    echo "dir to is: $dir"
-    wget -t1 -b -q -O - "localhost:8764/search/local?questionDir=$questionDir/q$dir&answerDir=$answerDir" > /dev/null 2>&1
-    done
+    #for dir in $@ ; do
+    #echo "dir to is: $dir"
+    #wget -t1 -b -q -O - "localhost:8764/search/local?questionDir=$questionDir/q$dir&answerDir=$answerDir" > /dev/null 2>&1
+    #done
 else
     echo "Missing argument to exec!"
 fi
