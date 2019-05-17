@@ -20,20 +20,16 @@ if [[ $# -gt 0 ]]; then
                 answerDir=$1
                 echo "set answer dir is: $answerDir"
                 ;;
-            -h | --help )
-                exit
-                ;;
-            * )
-                exit 1
+
         esac
         shift
     done
-
-    #for dir in $@ ; do
-    #echo "dir to is: $dir"
-    #wget -t1 -b -q -O - "localhost:8764/search/local?questionDir=$questionDir/q$dir&answerDir=$answerDir" > /dev/null 2>&1
-    #done
 else
     echo "Missing argument to exec!"
 fi
 
+
+for dir in $(find ${questionDir}  -maxdepth 1 -mindepth 1 -type d | grep -v "\.") ; do
+    echo "dir to is: $dir"
+    wget -t1 -b -q -O - "localhost:8764/search/local?questionDir=$dir&answerDir=$answerDir" > /dev/null 2>&1
+done
