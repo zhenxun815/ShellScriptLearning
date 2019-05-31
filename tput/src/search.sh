@@ -8,7 +8,7 @@ answerDir=/home/tqhy/ip_data/answer
 
 if [[ $# -gt 0 ]]; then
     while [[ $1 != "" ]];do
-        echo "current argument is: $1"
+        #echo "current argument is: $1"
         case $1 in
             -q | --question-dir )
                 shift
